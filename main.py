@@ -1,6 +1,7 @@
 from flask import Flask
 from flask import url_for
 from flask import request
+from random import choice
 
 app = Flask(__name__)
 
@@ -212,6 +213,50 @@ def form_sample():
         print(request.form['about'])
         print(request.form)
         return "Форма отправлена"
+
+
+@app.route('/choice/<planet_name>')
+def planet_info(planet_name):
+    text = {'Меркурий': ["Ближайшая к Солнцу планета", "Наименьшая планета системы", "Назван в честь бога торговли",
+                         "Нет атмосферы"],
+            'Венера': ["Вторая планета Солнечной системы", "Планета земной группы", "Названа в честь богини любви",
+                       "Есть атмосфера"],
+            'Земля': ["Третья планета Солнечной системы", "Планета земной группы", "Планета, где есть жизнь",
+                      "Есть атмосфера"],
+            'Марс': ["Четвертая планета Солнечной системы", "Планета земной группы", "Назван в честь бога войны",
+                     "Нет атмосферы"],
+            'Юпитер': ["Пятая планета Солнечной системы", "Газообразная планета", "Назван в честь бога громовержца",
+                       "Самая большая планета Солнечной системы"],
+            'Сатурн': ["Шестая планета Солнечной системы", "Газообразная планета", "Назван в честь бога земледелия",
+                       "Вторая по размеру планета Солнечной системы"],
+            'Уран': ["Седьмая планета Солнечной системы", "Газообразная планета", "Назван в честь бога неба",
+                     "Относится к холодным газовым гигантам"],
+            'Нептун': ["Восьмая планета Солнечной системы", "Газообразная планета", "Назван в честь бога моря",
+                       "Относится к холодным газовым гигантам"],
+            'А такой нет': ["Вы что-то напутали", "Такой планеты в нашей системе нет"],
+            'Плутон': ["С 2008 года он больше не планета", "он относится к Карликовым планетам"]}
+    if planet_name not in text:
+        planet_name = 'А такой нет'
+    colors = ['dark', 'success', 'secondary', 'warning', 'danger', 'primary', 'info', 'light']
+    html_text = "".join([f"""<div class="alert alert-{choice(colors)}" role="alert">
+  {i}
+</div>""" for i in text[planet_name]])
+    return f"""<!doctype html>
+                <html lang="en">
+                  <head>
+                    <meta charset="utf-8">
+                    <title>Варианты выбора</title>
+                    <link rel="stylesheet" 
+                    href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" 
+                    integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" 
+                    crossorigin="anonymous">
+                    <link rel="stylesheet" type="text/css" href="static/css/style.css"/>
+                  </head>
+                  <body>
+                    <h1>Мое предложение: {planet_name}</h1>
+                  </body>
+                  {html_text}
+                </html>"""
 
 
 if __name__ == '__main__':
