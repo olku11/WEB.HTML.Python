@@ -1,6 +1,7 @@
 from flask import Flask
 from flask import url_for
 from flask import request
+
 app = Flask(__name__)
 
 
@@ -83,7 +84,7 @@ def prom_im():
                   </body>"""
 
 
-@app.route('/form_sample', methods=['POST', 'GET'])
+@app.route('/astronaut_selection', methods=['POST', 'GET'])
 def form_sample():
     if request.method == 'GET':
         return f'''<!doctype html>
@@ -95,12 +96,12 @@ def form_sample():
                             href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css"
                             integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1"
                             crossorigin="anonymous">
-                            <link rel="stylesheet" type="text/css" href="{url_for('static', filename='css/style.css')}" />
+                            <link rel="stylesheet" type="text/css" href="{url_for('static', filename='css/style1.css')}" />
                             <title>Пример формы</title>
                           </head>
                           <body>
-                            <h2>Анкета претендента</h2>
-                            <h4>на участие в миссии</h4>
+                            <h1>Анкета претендента</h1>
+                            <h2>на участие в миссии</h2>
                             <div>
                                 <form class="login_form" method="post">
                                     <input type="fam" class="form-control" id="fam" aria-describedby="emailHelp" placeholder="Введите фамилию" name="fam">
@@ -109,7 +110,7 @@ def form_sample():
                                     <input type="email" class="form-control" id="email" placeholder="Введите email" name="email">
                                     <div class="form-group">
                                         <label for="classSelect">Какое у вас образование?</label>
-                                        <select class="form-control" id="classSelect" name="class">
+                                        <select class="form-control" id="class" name="class">
                                           <option>Начальное</option>
                                           <option>Среднее общее</option>
                                           <option>Среднее профессиональное</option>
@@ -120,49 +121,49 @@ def form_sample():
                                     <div class="form-group">
                                         <label for="form-check">Какие у вас есть профессии?</label>
                                         <div class="form-check">
-                                          <input class="form-check-input" type="checkbox" name="profession" id="research-engineer" value="research-engineer" checked>
+                                          <input class="form-check-input" type="checkbox" name="profession" id="research-engineer" value="research-engineer">
                                           <label class="form-check-label" for="male">
                                             Инженер-исследователь
                                           </label>
                                         </div>
                                         <div class="form-check">
-                                          <input class="form-check-input" type="checkbox" name="profession" id="building engineer" value="building engineer" checked>
+                                          <input class="form-check-input" type="checkbox" name="profession" id="building engineer" value="building engineer">
                                           <label class="form-check-label" for="male">
                                             Инженер строитель
                                           </label>
                                         </div>
                                         <div class="form-check">
-                                          <input class="form-check-input" type="checkbox" name="profession" id="pilot" value="pilot" checked>
+                                          <input class="form-check-input" type="checkbox" name="profession" id="pilot" value="pilot">
                                           <label class="form-check-label" for="male">
                                             Пилот
                                           </label>
                                         </div>
                                         <div class="form-check">
-                                          <input class="form-check-input" type="checkbox" name="profession" id="builder" value="builder" checked>
+                                          <input class="form-check-input" type="checkbox" name="profession" id="builder" value="builder">
                                           <label class="form-check-label" for="male">
                                             Строитель
                                           </label>
                                         </div>
                                         <div class="form-check">
-                                          <input class="form-check-input" type="checkbox" name="profession" id="exobiologist" value="exobiologist" checked>
+                                          <input class="form-check-input" type="checkbox" name="profession" id="exobiologist" value="exobiologist">
                                           <label class="form-check-label" for="male">
                                             Экзобиолог
                                           </label>
                                         </div>
                                         <div class="form-check">
-                                          <input class="form-check-input" type="checkbox" name="profession" id="meteorologist" value="meteorologist" checked>
+                                          <input class="form-check-input" type="checkbox" name="profession" id="meteorologist" value="meteorologist">
                                           <label class="form-check-label" for="male">
                                             Метеоролог
                                           </label>
                                         </div>
                                         <div class="form-check">
-                                          <input class="form-check-input" type="checkbox" name="profession" id="doctor" value="doctor" checked>
+                                          <input class="form-check-input" type="checkbox" name="profession" id="doctor" value="doctor">
                                           <label class="form-check-label" for="male">
                                             Врач
                                           </label>
                                         </div>
                                         <div class="form-check">
-                                          <input class="form-check-input" type="checkbox" name="profession" id="pilot" value="pilot" checked>
+                                          <input class="form-check-input" type="checkbox" name="profession" id="pilot" value="Climatolog"
                                           <label class="form-check-label" for="male">
                                             Климатолог
                                           </label>
@@ -171,7 +172,7 @@ def form_sample():
                                     <div class="form-group">
                                         <label for="form-check">Укажите пол</label>
                                         <div class="form-check">
-                                          <input class="form-check-input" type="radio" name="sex" id="male" value="male" checked>
+                                          <input class="form-check-input" type="radio" name="sex" id="male" value="male">
                                           <label class="form-check-label" for="male">
                                             Мужской
                                           </label>
@@ -201,14 +202,17 @@ def form_sample():
                           </body>
                         </html>'''
     elif request.method == 'POST':
-        print(request.form['fam'])
-        print(request.form['name'])
         print(request.form['email'])
+        print(request.form['name'])
+        print(request.form['fam'])
         print(request.form['class'])
         print(request.form['file'])
-        print(request.form['about'])
-        print(request.form['accept'])
+        print(request.form.get('accept'))
         print(request.form['sex'])
+        print(request.form['about'])
+        print(request.form)
         return "Форма отправлена"
+
+
 if __name__ == '__main__':
     app.run(port=8080, host='127.0.0.1')
