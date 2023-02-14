@@ -101,7 +101,7 @@ def form_sample():
                           </head>
                           <body>
                             <h2>Анкета претендента</h2>
-                            <h3>на участие в миссии</h3>
+                            <h4>на участие в миссии</h4>
                             <div>
                                 <form class="login_form" method="post">
                                     <input type="fam" class="form-control" id="fam" aria-describedby="emailHelp" placeholder="Введите фамилию" name="fam">
