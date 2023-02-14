@@ -100,8 +100,8 @@ def form_sample():
                             <title>Пример формы</title>
                           </head>
                           <body>
-                            <h1>Анкета претендента</h1>
-                            <h2>на участие в миссии</h2>
+                            <h2>Анкета претендента</h2>
+                            <h3>на участие в миссии</h3>
                             <div>
                                 <form class="login_form" method="post">
                                     <input type="fam" class="form-control" id="fam" aria-describedby="emailHelp" placeholder="Введите фамилию" name="fam">
