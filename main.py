@@ -6,17 +6,17 @@ from random import choice
 app = Flask(__name__)
 
 
-@app.route('/')
+@app.route("/")
 def start():
     return "Миссия Колонизация Марса"
 
 
-@app.route('/index')
+@app.route("/index")
 def index():
     return "И на Марсе будут яблони цвести!"
 
 
-@app.route('/promotion')
+@app.route("/promotion")
 def return_sample_page():
     return """<!doctype html>
                 <html lang="en">
@@ -35,7 +35,7 @@ def return_sample_page():
                 </html>"""
 
 
-@app.route('/image_mars')
+@app.route("/image_mars")
 def mars_im():
     return f"""<!doctype html>
                 <html lang="en">
@@ -50,13 +50,13 @@ def mars_im():
                   </body>"""
 
 
-@app.route('/promotion_image')
+@app.route("/promotion_image")
 def prom_im():
     return f"""<!doctype html>
                 <html lang="en">
                   <head>
                     <meta charset="utf-8">
-                    <link rel="stylesheet" type="text/css" href="{url_for('static', filename='css/style.css')}" />
+                    <link rel="stylesheet" type="text/css" href="{url_for("static", filename="css/style.css")}" />
                      <link rel="stylesheet" 
                     href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" 
                     integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" 
@@ -85,9 +85,9 @@ def prom_im():
                   </body>"""
 
 
-@app.route('/astronaut_selection', methods=['POST', 'GET'])
+@app.route("/astronaut_selection", methods=["POST", "GET"])
 def form_sample():
-    if request.method == 'GET':
+    if request.method == "GET":
         return f'''<!doctype html>
                         <html lang="en">
                           <head>
@@ -97,7 +97,7 @@ def form_sample():
                             href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css"
                             integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1"
                             crossorigin="anonymous">
-                            <link rel="stylesheet" type="text/css" href="{url_for('static', filename='css/style1.css')}" />
+                            <link rel="stylesheet" type="text/css" href="{url_for("static", filename="css/style1.css")}" />
                             <title>Пример формы</title>
                           </head>
                           <body>
@@ -202,42 +202,42 @@ def form_sample():
                             </div>
                           </body>
                         </html>'''
-    elif request.method == 'POST':
-        print(request.form['email'])
-        print(request.form['name'])
-        print(request.form['fam'])
-        print(request.form['class'])
-        print(request.form['file'])
-        print(request.form.get('accept'))
-        print(request.form['sex'])
-        print(request.form['about'])
+    elif request.method == "POST":
+        print(request.form["email"])
+        print(request.form["name"])
+        print(request.form["fam"])
+        print(request.form["class"])
+        print(request.form["file"])
+        print(request.form.get("accept"))
+        print(request.form["sex"])
+        print(request.form["about"])
         print(request.form)
         return "Форма отправлена"
 
 
-@app.route('/choice/<planet_name>')
+@app.route("/choice/<planet_name>")
 def planet_info(planet_name):
-    text = {'Меркурий': ["Ближайшая к Солнцу планета", "Наименьшая планета системы", "Назван в честь бога торговли",
+    text = {"Меркурий": ["Ближайшая к Солнцу планета", "Наименьшая планета системы", "Назван в честь бога торговли",
                          "Нет атмосферы"],
-            'Венера': ["Вторая планета Солнечной системы", "Планета земной группы", "Названа в честь богини любви",
+            "Венера": ["Вторая планета Солнечной системы", "Планета земной группы", "Названа в честь богини любви",
                        "Есть атмосфера"],
-            'Земля': ["Третья планета Солнечной системы", "Планета земной группы", "Планета, где есть жизнь",
+            "Земля": ["Третья планета Солнечной системы", "Планета земной группы", "Планета, где есть жизнь",
                       "Есть атмосфера"],
-            'Марс': ["Четвертая планета Солнечной системы", "Планета земной группы", "Назван в честь бога войны",
+            "Марс": ["Четвертая планета Солнечной системы", "Планета земной группы", "Назван в честь бога войны",
                      "Нет атмосферы"],
-            'Юпитер': ["Пятая планета Солнечной системы", "Газообразная планета", "Назван в честь бога громовержца",
+            "Юпитер": ["Пятая планета Солнечной системы", "Газообразная планета", "Назван в честь бога громовержца",
                        "Самая большая планета Солнечной системы"],
-            'Сатурн': ["Шестая планета Солнечной системы", "Газообразная планета", "Назван в честь бога земледелия",
+            "Сатурн": ["Шестая планета Солнечной системы", "Газообразная планета", "Назван в честь бога земледелия",
                        "Вторая по размеру планета Солнечной системы"],
-            'Уран': ["Седьмая планета Солнечной системы", "Газообразная планета", "Назван в честь бога неба",
+            "Уран": ["Седьмая планета Солнечной системы", "Газообразная планета", "Назван в честь бога неба",
                      "Относится к холодным газовым гигантам"],
-            'Нептун': ["Восьмая планета Солнечной системы", "Газообразная планета", "Назван в честь бога моря",
+            "Нептун": ["Восьмая планета Солнечной системы", "Газообразная планета", "Назван в честь бога моря",
                        "Относится к холодным газовым гигантам"],
-            'А такой нет': ["Вы что-то напутали", "Такой планеты в нашей системе нет"],
-            'Плутон': ["С 2008 года он больше не планета", "он относится к Карликовым планетам"]}
+            "А такой нет": ["Вы что-то напутали", "Такой планеты в нашей системе нет"],
+            "Плутон": ["С 2008 года он больше не планета", "он относится к Карликовым планетам"]}
     if planet_name not in text:
-        planet_name = 'А такой нет'
-    colors = ['dark', 'success', 'secondary', 'warning', 'danger', 'primary', 'info', 'light']
+        planet_name = "А такой нет"
+    colors = ["dark", "success", "secondary", "warning", "danger", "primary", "info", "light"]
     html_text = "".join([f"""<div class="alert alert-{choice(colors)}" role="alert">
   {i}
 </div>""" for i in text[planet_name]])
@@ -259,5 +259,36 @@ def planet_info(planet_name):
                 </html>"""
 
 
-if __name__ == '__main__':
-    app.run(port=8080, host='127.0.0.1')
+@app.route("/results/<nickname>/<int:level>/<float:rating>")
+def test(nickname, level, rating):
+    colors = ["success", "warning", "danger"]
+    if rating <= 50:
+        clr = colors[2]
+    elif rating <= 75:
+        clr = colors[1]
+    else:
+        clr = colors[0]
+    html_text = f"""<div class="alert alert-{clr}" role="alert">Поздравляем! Ваш рейтинг после {level} этапа 
+    отбора:</div> """
+    return f"""<!doctype html>
+                <html lang="en">
+                  <head>
+                    <meta charset="utf-8">
+                    <title>Результаты</title>
+                    <link rel="stylesheet" 
+                    href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" 
+                    integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" 
+                    crossorigin="anonymous">
+                  </head>
+                  <body>
+                    <h1>Результаты отбора</h1>
+                    <h2>Претендента на участие в миссии {nickname}:</h2>
+                    <h4>{html_text}
+                    составляет {rating}!
+                    <div class="alert alert-info" role="alert">Желаем удачи!</div></h4>
+                  </body>
+                </html>"""
+
+
+if __name__ == "__main__":
+    app.run(port=8080, host="127.0.0.1")
